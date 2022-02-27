@@ -4,8 +4,8 @@ public class Person {
     private String name;
     private String family;
     private Integer age;
-    Sex sex;
-    Education education;
+    private Sex sex;
+    private Education education;
 
     public Person(String name, String family, Integer age, Sex sex, Education education) {
         this.name = name;

@@ -26,19 +26,29 @@ public class Main {
         System.out.println();
 
         List<String> recruits = persons.stream()
-                .filter(person -> person.getAge() == 18)
+                .filter(person -> person.getAge() >= 18 && person.getAge() <= 27)
                 .filter(person -> person.getSex() != Sex.WOMAN)
                 .map(Person::getFamily)
                 .collect(Collectors.toList());
         System.out.println(recruits);
         System.out.println();
 
-        List<String> works = persons.stream()
-                .filter(person -> person.getAge() > 18 && person.getAge() < 60)
-                .filter(person -> person.education == Education.HIGHER)
+        List<String> worksMen = persons.stream()
+                .filter(person -> person.getAge() > 18 && person.getAge() < 65 && person.getSex() == Sex.MAN)
+                .filter(person -> person.getEducation() == Education.HIGHER)
                 .sorted(Comparator.comparing(Person::getFamily))
                 .map(Person::toString)
                 .collect(Collectors.toList());
-        System.out.println(works);
+
+        List<String> worksWomen = persons.stream()
+                .filter(person -> person.getAge() > 18 && person.getAge() < 60 && person.getSex() == Sex.WOMAN)
+                .filter(person -> person.getEducation() == Education.HIGHER)
+                .sorted(Comparator.comparing(Person::getFamily))
+                .map(Person::toString)
+                .collect(Collectors.toList());
+
+        worksMen.addAll(worksWomen);
+
+        System.out.println(worksMen);
     }
 }
